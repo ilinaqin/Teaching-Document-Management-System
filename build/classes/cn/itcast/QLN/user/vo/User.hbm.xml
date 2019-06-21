@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="cn.itcast.QLN.user.vo.User" table="user">
+	<id name="uid">
+	   <generator class="native"></generator>
+	</id>
+	<property name="username"/>
+	<property name="password"/>
+	<property name="name"/>
+	<property name="jobtitle"/>
+	<property name="phone"/>
+	<property name="addr"/>
+	
+	
+	<!-- 用户与文档的关联 -->
+		<set name="documentss"  lazy="false">
+			<key column="uid"/>
+			<one-to-many class="cn.itcast.QLN.document.vo.Document"/>
+		</set>
+	
+</class>
+</hibernate-mapping>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<class name="cn.itcast.QLN.document.vo.Document" table="document">
+	<id name="did">
+	   <generator class="native"></generator>
+	</id>
+	<property name="dname"/>
+	<property name="academy"/>
+	<property name="department"/>
+	<property name="dimg"/>
+	<property name="dtime"/>
+	<property name="ddescrip"/>
+	<property name="state"/>
+	<property name="place"/>
+	<property name="placestate"/>
+	<property name="manreason"/>
+	<property name="leadreason"/>
+	
+	<property name="teachersubtime"/>
+	<property name="mantime"/>
+	<property name="leadtime"/>
+	<property name="sectime"/>
+	
+	
+	<!-- 文档与一级分类的关联 -->
+		<many-to-one name="category" lazy="false" class="cn.itcast.QLN.category.vo.Category" column="cid"></many-to-one>
+	
+	<!-- 文档与用户的关联 -->
+		<many-to-one name="user" lazy="false" class="cn.itcast.QLN.user.vo.User" column="uid"></many-to-one>
+</class>
+</hibernate-mapping>

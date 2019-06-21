@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/*
+ * Copyright 2005-2013 dhcc.com.cn. All rights reserved.
+ * Support: http://www.dhcc.com.cn
+ * License: http://www.dhcc.com.cn/license
+ * 
+ * Style - Register
+ * Version: 3.0
+ */
+
+/* ---------- Register ---------- */
+
+div.center {
+	
+	border-bottom: 1px dotted #ededed;
+}
+
+div.title {
+	margin-top:10px;
+	margin-left:70px;;
+	width:90%;
+	
+	height: 40px;
+	line-height: 40px;
+	color: #d8d8d8;
+	font-family: "Microsoft YaHei";
+	border-bottom: 1px dotted #ededed;
+}
+
+div.title strong {
+	padding: 0px 10px;
+	color: #3164af;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+div.centerr{
+	width:500px;
+	float:left;
+	margin-left:250px;
+	margin-top:20px;
+	}
+
+table tr{
+	line-height:40px;
+	color:#000;
+	font-family: "Microsoft YaHei";
+	font-size:12px;
+}
+
+table th{
+	padding-bottom:3px;
+	width:100px;
+	text-align:right;
+}
+
+table td {
+	float:left;
+	padding-left:40px;
+}
+
+table th .requiredField{
+	color:#F00;}
+
+

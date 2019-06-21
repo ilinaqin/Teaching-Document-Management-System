@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+	<!-- 下面这条语句限制上传文件的大小 -->
+	<constant name="struts.multipart.maxSize" value="90000000"/> 
+    <constant name="struts.devMode" value="false" />
+    <package name="QLN" extends="struts-default" namespace="/">
+    <!-- 配置首页访问的Action -->
+		<action name="login" class="loginAction">
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+		</action>
+		
+		<!-- 配置用户模块的Action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/regist.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="teacherLoginSuccess">/WEB-INF/jsp/totaldoc.jsp</result>
+			<result name="managerLoginSuccess">/WEB-INF/jsp/mantotal.jsp</result>
+			<result name="leaderLoginSuccess">/WEB-INF/jsp/leadertotal.jsp</result>
+			<result name="secLoginSuccess">/WEB-INF/jsp/sectotal.jsp</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/regist.jsp</result>
+			<result name="logincheckcodeFail">/WEB-INF/jsp/login.jsp</result>
+			<result name="quit">/WEB-INF/jsp/login.jsp</result>
+		</action>
+		<!-- 配置验证码的Action -->
+		<action name="checkImg" class="checkImgAction"></action>
+		 <action name="view_*" class="ViewAction" method="{1}">
+        </action>
+			<!-- 配置文档的Action -->
+		<action name="document_*" class="DocumentAction" method="{1}">
+		  					 <!-- 显示总文档信息 -->
+			<result name="findPage">/WEB-INF/jsp/totaldoc.jsp</result>			                   
+			
+							<!-- 根据一级分类进行文件查询 -->
+			<result name="findByCid">/WEB-INF/jsp/findByCid.jsp</result>
+							<!-- 跳转到上传页面 -->
+			<result name="upload">/WEB-INF/jsp/upload1.jsp</result>	
+							<!-- 文件上传成功返回总页面 -->				
+			<result name="saveSuccess" type="chain">document_findPage</result>
+							<!-- 上传文档信息重置-->
+			<result name="rollback">/WEB-INF/jsp/upload1.jsp</result>
+							<!-- 模糊查询返回页面 -->
+			<result name="docSearch">/WEB-INF/jsp/querydoc.jsp</result>
+			<result name="docSearcherr">/WEB-INF/jsp/docSearcherr.jsp</result>
+			               <!-- 文档删除返回页面 -->
+			<result name="deleteSuccess">/WEB-INF/jsp/unsubmit.jsp</result>
+			               <!-- 文档提交返回页面 -->
+			<result name="submitdoc" type="chain">document_submited</result>
+			
+			
+			
+			               <!-- 文档待提交返回页面 -->
+			<result name="unsubmit">/WEB-INF/jsp/unsubmit.jsp</result>
+			               <!-- 文档审核不通过返回页面 -->
+			<result name="checkunpass">/WEB-INF/jsp/unpass.jsp</result>
+			
+			
+			
+			
+			                <!-- 已提交文档返回页面 -->
+			<result name="submited">/WEB-INF/jsp/checkpass.jsp</result>
+			               <!-- 已提交文档但是尚未审核返回页面 -->
+			<result name="uncheck">/WEB-INF/jsp/uncheck.jsp</result>
+			              <!-- 一级审核通过返回页面 -->
+			<result name="checkpass1">/WEB-INF/jsp/checkpass1.jsp</result>
+			              <!-- 二级审核通过返回页面 -->
+			<result name="checkpass2">/WEB-INF/jsp/checkpass2.jsp</result>
+			
+			
+			
+							<!-- 文件下载 -->
+			 <result name="download" type="stream">   <!--定义返回值为流-->
+            <param name="inputName">inputStream</param>  <!--方法内部使用的流的名称-->
+            <!--文件下载的处理方式--> 
+             <param name="contentDisposition">attachment;filename="${uploadFileName}"</param>  
+            <param name="bufferSize">204800</param>  <!--下载缓冲区的大小-->
+        </result>  
+        
+        				<!-- 文件预览-->
+		<result name="docview1"  type="stream">  <!--定义返回值为流-->
+			<!--  <param name="allowedTypes">application/pdf,image/jpeg,</param> -->
+              <!-- <param name="contentType">application/pdf</param> -->
+          <!--   <param name="inputName">inputStream</param> -->  <!--方法内部使用的流的名称-->
+            <!--文件下载的处理方式，attachment是下载，inline是显示注释掉这面这句便是预览inline;--> 
+             <!--  <param name="contentDisposition">filename="${uploadFileName}"</param>  --> 
+           
+             <param name="bufferSize">204800</param>  <!--下载缓冲区的大小-->
+        </result> 
+        
+        
+		</action>
+		
+		
+		
+			
+			<!-- 配置管理员文档的Action -->
+			<action name="managerdocument_*" class="ManagerDocumentAction" method="{1}">
+			          <!-- 显示总文档信息 -->
+			<result name="findManagerPage">/WEB-INF/jsp/mantotal.jsp</result>
+			          <!-- 显示所有未提交文档的页面 -->
+			<result name="uncheckDoc">/WEB-INF/jsp/manunsubmit.jsp</result>
+			             <!-- 显示二级审核未通过的文档信息 checkedDoc-->
+			<result name="unpass">/WEB-INF/jsp/manleadunpass.jsp</result>
+			
+			               <!-- 显示所有已提交的文档信息 -->
+			<result name="checkedDoc">/WEB-INF/jsp/manpass.jsp</result>
+			                <!-- 显示二级审核通过文档信息 -->
+			<result name="checkedManagerpass2">/WEB-INF/jsp/manpass2.jsp</result>
+			                 <!-- 显示审核不通过文档信息 -->
+			<result name="managercheckunpass">/WEB-INF/jsp/manunpass.jsp</result>
+			
+			
+			               <!-- 成功提交之后返回相应页面-->
+			<result name="managerSubmitChangeState" type="chain" >managerdocument_checkedManagerDoc</result>
+			               
+			</action>
+			
+			
+			
+			<!-- 配置领导文档的Action -->
+			<action name="leaderdocument_*" class="LeaderDocumentAction" method="{1}">
+			          <!-- 显示总文档信息 -->
+			<result name="findLeaderPage">/WEB-INF/jsp/leadertotal.jsp</result>
+			           <!-- 显示已经审核的信息 -->
+			<result name="leaderChecked">/WEB-INF/jsp/leadpassed.jsp</result>
+			              <!-- 显示未审核的信息 -->
+			<result name="uncheckLeaderDoc">/WEB-INF/jsp/leadunsubmit.jsp</result>
+			             <!-- 领导提交成功之后改变状态返回页面 -->
+			<result name="leaderChangeState"  type="chain" >leaderdocument_leaderChecked</result>
+			              <!-- 领导退回之后改变状态返回页面 leaderUnpass-->
+			<result name="leaderRollbackChangeState"  type="chain" >leaderdocument_uncheckLeaderDoc</result>
+                          <!-- 显示审核未通过文档 -->
+			<result name="leaderUnpass">/WEB-INF/jsp/leaderunpass.jsp</result>
+
+			</action>
+			
+			
+			      <!-- 配置秘书归置文档的Action -->
+			<action name="secdocument_*" class="SecDocumentAction" method="{1}">
+			          <!-- 显示返回首页总文档信息 -->
+			<result name="findSecPage">/WEB-INF/jsp/sectotal.jsp</result>
+			           <!-- 显示待归档的的信息 -->
+			<result name="secUnplace">/WEB-INF/jsp/secuncheck.jsp</result>
+			           <!-- 显示已归档的的信息 -->
+			<result name="secPlaced">/WEB-INF/jsp/secplaced.jsp</result>
+			            <!-- 文档归档之后返回页面-->
+			<result name="place" type="chain" >secdocument_secUnplace</result>
+			<result name="showplace">/WEB-INF/jsp/showplace.jsp</result>
+
+			</action>
+	
+	
+	 
+	
+		
+    </package>
+    </struts>
